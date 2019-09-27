@@ -38,4 +38,10 @@ class Student
     DB[:conn].execute(sql, self.name, self.grade)
     #Important: Remember that the INTEGER PRIMARY KEY datatype will assign and auto-increment the id attribute of each record that gets saved
   end
+
+  def self.create(name:, grade:)
+    a_student = Student.new(name, grade)
+    a_student.save
+    a_student
+  end
 end
