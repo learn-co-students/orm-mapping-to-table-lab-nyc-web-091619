@@ -9,7 +9,7 @@ class Student
   def initialize(name, grade, id = nil)
     @name = name
     @grade = grade
-    @id = id
+    @id = 1
   end
 
   def self.create_table
@@ -28,5 +28,14 @@ class Student
       DROP TABLE students;
       SQL
     DB[:conn].execute(sql)
+  end
+
+  def save
+    sql = <<-SQL
+      INSERT INTO students (name, grade)
+      VALUES ( ?, ?)
+    SQL
+    DB[:conn].execute(sql, self.name, self.grade)
+    #Important: Remember that the INTEGER PRIMARY KEY datatype will assign and auto-increment the id attribute of each record that gets saved
   end
 end
